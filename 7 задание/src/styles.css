@@ -1,0 +1,188 @@
+:root {
+    --body-top: #8cc0ee;      /* корпус */
+    --body-bottom: #6fa6dc;
+    --body-edge: #5a8fc6;
+    --lcd: #b8c2a8;           /* экран */
+    --lcd-dark: #8e9a80;
+    --seg-on: #1d2419;        /* горящий сегмент */
+    --seg-off: rgba(29, 36, 25, .07);
+    --key-white: #f4f6f8;
+    --key-white-text: #24308f;
+    --key-blue: #2c3f9a;
+    --key-blue-dark: #1d2b74;
+    --key-red: #d7312f;
+    --key-red-dark: #9f1f1d;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 30%, #f3f5f8, #d9dee6);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===== Корпус ===== */
+.calc {
+    width: 360px;
+    padding: 26px 22px 30px;
+    border-radius: 34px;
+    background: linear-gradient(180deg, var(--body-top), var(--body-bottom));
+    border: 3px solid var(--body-edge);
+    box-shadow:
+        0 22px 40px -18px rgba(30, 60, 100, .55),
+        inset 0 2px 0 rgba(255, 255, 255, .55),
+        inset 0 -3px 0 rgba(0, 0, 0, .08);
+    user-select: none;
+}
+
+.calc__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 6px 12px;
+    color: #fff;
+}
+
+.calc__brand {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 26px;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .15);
+}
+
+.calc__model {
+    text-align: right;
+    font-size: 11px;
+    line-height: 1.35;
+}
+
+.calc__model b {
+    display: block;
+    font-size: 19px;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(255, 255, 255, .8);
+    margin-bottom: 2px;
+}
+
+/* ===== Экран (жидкокристаллический, 8 разрядов) ===== */
+.lcd {
+    position: relative;
+    height: 96px;
+    margin-bottom: 26px;
+    padding: 22px 12px 10px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, var(--lcd-dark), var(--lcd) 22%);
+    border: 7px solid #5d8dbd;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, .28);
+}
+
+.lcd__flags {
+    position: absolute;
+    left: 12px;
+    top: 5px;
+    display: flex;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: bold;
+    color: var(--seg-on);
+}
+
+.lcd__flags span { opacity: 0; transition: opacity .1s; }
+.lcd__flags span.on { opacity: .85; }
+
+.digits {
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+    height: 100%;
+}
+
+/* Один разряд: 7 сегментов + точка */
+.digit {
+    position: relative;
+    width: 30px;
+    height: 100%;
+    transform: skewX(-6deg);
+}
+
+.seg {
+    position: absolute;
+    background: var(--seg-off);
+    border-radius: 2px;
+}
+
+.seg.on { background: var(--seg-on); }
+
+.seg.a, .seg.d, .seg.g { left: 4px; right: 4px; height: 5px; }
+.seg.a { top: 0; }
+.seg.g { top: calc(50% - 2.5px); }
+.seg.d { bottom: 0; }
+.seg.b, .seg.c, .seg.e, .seg.f { width: 5px; height: calc(50% - 4px); }
+.seg.f { left: 0; top: 3px; }
+.seg.b { right: 0; top: 3px; }
+.seg.e { left: 0; bottom: 3px; }
+.seg.c { right: 0; bottom: 3px; }
+.seg.dp { width: 6px; height: 6px; right: -6px; bottom: 0; border-radius: 50%; }
+
+/* ===== Кнопки ===== */
+.keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 52px;
+    gap: 13px 14px;
+}
+
+.key {
+    border: none;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform .06s, box-shadow .06s;
+}
+
+.key:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+
+.key--num {
+    background: linear-gradient(180deg, #ffffff, var(--key-white));
+    color: var(--key-white-text);
+    box-shadow: 0 4px 0 #b8c3cf, 0 6px 8px -4px rgba(0, 0, 0, .3);
+}
+
+.key--fn {
+    background: linear-gradient(180deg, #3a50b3, var(--key-blue));
+    color: #fff;
+    font-size: 22px;
+    box-shadow: 0 4px 0 var(--key-blue-dark), 0 6px 8px -4px rgba(0, 0, 0, .35);
+}
+
+.key--small { font-size: 17px; font-weight: bold; }
+
+.key--red {
+    background: linear-gradient(180deg, #e8433f, var(--key-red));
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 4px 0 var(--key-red-dark), 0 6px 8px -4px rgba(0, 0, 0, .35);
+}
+
+.key--plus { grid-row: span 2; font-size: 34px; }
+
+.key:active, .key.pressed {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, .25);
+}
+
+.hint {
+    margin: 18px 4px 0;
+    color: #fff;
+    font-size: 11px;
+    line-height: 1.5;
+    opacity: .9;
+    text-align: center;
+}
