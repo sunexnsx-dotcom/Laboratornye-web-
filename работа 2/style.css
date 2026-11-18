@@ -1,0 +1,257 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff;
+}
+
+
+/* ========================================
+   ЗАДАНИЕ 1
+   ======================================== */
+
+.task1 {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.numbers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.digit {
+    display: flex;
+    flex-direction: column;
+}
+
+.digit-row {
+    display: flex;
+}
+
+.digit-row > div {
+    width: 35px;
+    height: 35px;
+}
+
+.digit-row .b {
+    background: #000;
+}
+
+
+/* ========================================
+   ЗАДАНИЕ 2
+   Сетка 12 колонок, высота ячейки 150px.
+   Чёрный фон + рамка 15px у каждого блока
+   дают такие же «пробелы», как в task.html
+   ======================================== */
+
+.layout {
+    width: 1200px;
+    max-width: 100%;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #000;
+}
+
+.object,
+.row {
+    display: flex;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.block {
+    height: 150px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 15px solid #000;
+
+    color: #fff;
+    font-size: 16px;
+}
+
+
+/* ---------- Объект 1 (вариант 0): 3 | 6 | 3 ---------- */
+
+.o1 .c-cd5c5c { width: 25%; }
+.o1 .c-dc143c { width: 50%; }
+.o1 .c-8b0000 { width: 25%; }
+
+
+/* ---------- Объект 2 (вариант 4): 8 (2 строки) | 4 (высота 2) ---------- */
+
+.o2-main      { width: 66.6667%; }
+.o2 .c-c71585 { width: 33.3333%; height: 300px; }
+
+
+/* ---------- Объект 3 (вариант 1): 9 (3 строки) | 3 ---------- */
+
+.o3-main { width: 75%; }
+.o3-side { width: 25%; }
+
+.o3 .s { width: 25%; }    /* 9/4 колонки */
+.o3 .l { width: 75%; }    /* 27/4 колонки */
+
+.o3 .c-00ff00 { height: 300px; }
+
+
+/* ---------- Объект 4 (вариант 2): три блока по 2 колонки ---------- */
+
+.o4 {
+    justify-content: space-around;   /* отступы 1 | 2 | 2 | 1 колонка */
+}
+
+.o4 .block { width: 16.6667%; }
+
+
+/* ---------- Объект 5 (вариант 3): 3 (2 строки) | 3 (высота 2) | 6 ---------- */
+
+.o5 { flex-wrap: wrap; }
+
+.o5-a         { width: 25%; }
+.o5 .c-d2691e { width: 25%; height: 300px; }
+.o5-c         { width: 50%; }
+
+.o5-row .block { width: 50%; }
+
+
+/* ---------- Цвета ---------- */
+
+.c-cd5c5c { background: #CD5C5C; }
+.c-dc143c { background: #DC143C; }
+.c-8b0000 { background: #8B0000; }
+
+.c-ffc0cb { background: #FFC0CB; }
+.c-ff69b4 { background: #FF69B4; }
+.c-c71585 { background: #C71585; }
+
+.c-adff2f { background: #ADFF2F; }
+.c-00ff00 { background: #00FF00; }
+.c-32cd32 { background: #32CD32; }
+.c-00fa9a { background: #00FA9A; }
+.c-2e8b57 { background: #2E8B57; }
+.c-006400 { background: #006400; }
+.c-9acd32 { background: #9ACD32; }
+.c-808000 { background: #808000; }
+
+.c-ffa07a { background: #FFA07A; }
+.c-ff4500 { background: #FF4500; }
+.c-ffa500 { background: #FFA500; }
+
+.c-bc8f8f { background: #BC8F8F; }
+.c-f4a460 { background: #F4A460; }
+.c-d2691e { background: #D2691E; }
+.c-8b4513 { background: #8B4513; }
+.c-a52a2a { background: #A52A2A; }
+.c-800000 { background: #800000; }
+
+
+/* ========================================
+   768px
+   ======================================== */
+
+@media (max-width: 1199px) {
+
+    .layout { width: 768px; }
+
+    .block { font-size: 14px; }
+
+    /* Объект 1: 4 | 4 | 4 */
+    .o1 .block { width: 33.3333%; }
+
+    /* Объект 2: 6 | 6 */
+    .o2-main      { width: 50%; }
+    .o2 .c-c71585 { width: 50%; }
+
+    /* Объект 3: 9 | 3, справа только #00FF00 на 3 строки */
+    .o3 .s { width: 33.3333%; }
+    .o3 .l { width: 66.6667%; }
+
+    .o3 .c-adff2f { display: none; }
+    .o3 .c-00ff00 { height: 450px; }
+
+    /* Объект 4: 4 | 4 | 4 без отступов */
+    .o4 .block { width: 33.3333%; }
+
+    /* Объект 5: две строки 3|3|6 и 6|3|3 */
+    .o5-a,
+    .o5-c,
+    .o5-row { display: contents; }
+
+    .o5 .c-bc8f8f,
+    .o5 .c-f4a460,
+    .o5 .c-a52a2a,
+    .o5 .c-800000 { width: 25%; }
+
+    .o5 .c-d2691e,
+    .o5 .c-8b4513 { width: 50%; height: 150px; }
+}
+
+
+/* ========================================
+   320px
+   ======================================== */
+
+@media (max-width: 767px) {
+
+    .layout { width: 100%; }
+
+    .block { font-size: 12px; }
+
+    /* Задание 1 */
+    .numbers { gap: 15px; }
+
+    .digit-row > div {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Объект 1: 6 | 6, средний блок скрыт */
+    .o1 .block    { width: 50%; }
+    .o1 .c-dc143c { display: none; }
+
+    /* Объект 2: всё в столбик, #C71585 высотой 2 */
+    .o2           { flex-direction: column; }
+    .o2-main      { width: 100%; }
+    .o2 .c-c71585 { width: 100%; }
+
+    /* Объект 3: 3 строки по 6 | 6, ниже #00FF00 на всю ширину */
+    .o3      { flex-direction: column; }
+    .o3-main,
+    .o3-side { width: 100%; }
+
+    .o3 .s,
+    .o3 .l   { width: 50%; }
+
+    .o3 .c-00ff00 { height: 150px; }
+
+    /* Объект 4: 6 | 6, первый блок скрыт */
+    .o4 .block    { width: 50%; }
+    .o4 .c-ffa07a { display: none; }
+
+    /* Объект 5 */
+    .o5 .c-bc8f8f { order: 1; width: 50%; }
+    .o5 .c-f4a460 { order: 2; width: 50%; }
+    .o5 .c-8b4513 { order: 3; width: 100%; height: 300px; }
+    .o5 .c-d2691e { order: 4; width: 100%; height: 300px; }
+    .o5 .c-a52a2a { order: 5; width: 50%; }
+    .o5 .c-800000 { order: 6; width: 50%; }
+}
